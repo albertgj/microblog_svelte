@@ -44,12 +44,12 @@
         <form on:submit={onSubmit}>
             <div class="center-align">
                 <div class="input-field col s12">
-                    <input type="text" bind:value={username} class="autocomplete">
-                    <label for="autocomplete-input">Username</label>
+                    <input type="text" bind:value={username}>
+                    <label for="text">Username</label>
                 </div>
                 <div class="input-field col s12">
-                    <input type="password" bind:value={password}  class="autocomplete">
-                    <label for="autocomplete-input">Password</label>
+                    <input type="password" bind:value={password}>
+                    <label for="password">Password</label>
                 </div>
             </div>
             <div class="center-align">
