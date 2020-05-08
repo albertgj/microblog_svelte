@@ -1,76 +1,58 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     import axios from "axios";
-
     const dispatch = createEventDispatcher();
 
-    const apiBaseUrl =
-            "http://localhost:8080/api/v2/posts";
-    let token = document.cookie.substring(4);
     let titolo = '';
     let text = '';
-    let data = '2020-03-28 22:17:00';
-    let usernames = JSON.parse(atob(document.cookie.substring(4).split(".")[1]))["sub"];
+    let username = 'aaa';
 
-    let persona = {
-        username: 'aaa',
-        password: 'aaa'
-    }
-
-    let posts;
-    let post;
     let loading = false;
+    var d = new Date, dformat = [d.getFullYear(), d.getMonth()+1, d.getDate()].join('-')+' '+ [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+
+    let post;
+    const apiBaseUrl = "http://localhost:8080/api/v2/posts";
+    let token = document.cookie.substring(4);
+
 
     function onSubmit(event) {
         event.preventDefault();
 
-        if(titolo.trim() === '' || text.trim() === '') {
-            return;
+        if(text.trim() === '' || titolo.trim() === '') {
+            return ;
         }
 
         loading = true;
 
-        axios.
-        get(apiBaseUrl, {
-            headers: {
-                'Authorization': `Bearer ${token}`
+        const myPost = {
+            titolo: titolo,
+            data: dformat,
+            text: text,
+            persona: {
+                id: 1,
+                username: 'aaa'
             }
-        })
-                .then(response => {
-                    posts = response.data["body"]["response"];
-                });
+        };
 
-        const newPost = { titolo, text, persona, data}
-
+        //POST
         axios({
             url: apiBaseUrl,
-            method:'POST',
-            headers : {
-                Authorization : "Bearer " + `${token}`
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`
             },
-            data: newPost
-        }).then((response) => {
-            post= response.data
+            data: myPost
+        })
+        .then((response) => {
+            post = response.data;
             dispatch('postCreated', post);
+        })
+        .catch(error => console.log(error));
 
-        }).catch(function(error) {
-            console.log(error)
-        });
-
-        titolo = text = '';
         loading = false;
     }
 </script>
 
-<style>
-    form {
-        margin: 50px;
-    }
-
-    .progress {
-        margin: 100px 0;
-    }
-</style>
 
 {#if !loading}
     <form on:submit={onSubmit}>
@@ -89,3 +71,8 @@
 {:else}
     <div class="indeterminate"></div>
 {/if}
+
+
+<style>
+    
+</style>

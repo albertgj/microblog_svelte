@@ -1,5 +1,9 @@
 <script>
-    export let post;
+    export let comment;
+
+    function addComment() {
+
+    }
 </script>
 
 <style>
@@ -17,7 +21,12 @@
     }
 </style>
 
-
-<div class="container">
-    <p>{id}</p>
+<div class="row">
+    <div class="card">
+        <div class="card-content">
+            <p class="card-title">{comment.testo}</p>
+            <p class="timestamp">{comment.data}</p>
+            <p>Post created by: {comment.persona.username}</p>
+        </div>
+    </div>
 </div>
