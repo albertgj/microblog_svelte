@@ -4,9 +4,18 @@
   import axios from "axios";
   import {Router, Route} from "svelte-routing";
   import PostForm from '../components/PostForm.svelte';
+  import Account from "svelte-material-icons/Account.svelte";
+  import Calendar from "svelte-material-icons/Calendar.svelte";
 
   const apiBaseUrl = "http://localhost:8080/api/v2/posts";
-
+  //ICON CUSTOMIZATION
+  let color = "blue";
+  let size = 30;
+  let width = 20;
+  let height = 35;
+  let viewBox = "2 0 20 4";
+  let viewBoxCalendar = "-2 -2 25 14";
+  //-----------------
   let posts = [];
   let token = document.cookie.substring(4);
   let parsedToken = "";
@@ -87,10 +96,11 @@
         <div class="card">
           <div class="card-content">
             <p class="card-title">Title: {post.titolo}</p>
-            <p class="timestamp">{post.data}</p>
+            <p class="timestamp"><Calendar size={24} {width} viewBox={viewBoxCalendar}/> {post.data}</p>
             <p class="content">{post.text}</p>
             <br>
-            <p>Post created by: <strong>{post.user.username}</strong></p>
+            
+            <p><Account {color} {width} {height} {viewBox}/> <strong>{post.user.username}</strong></p>
           </div>
           <div class="card-action">
             <a href="/posts/{post.id}/comments" use:links>VIEW COMMENTS</a>

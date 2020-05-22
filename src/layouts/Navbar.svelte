@@ -1,5 +1,6 @@
 <script>
-  import { Link, links } from "svelte-routing";
+  import { Link, links, navigate } from "svelte-routing";
+  import Menu from "svelte-material-icons/Menu.svelte";
   let tokenMilliseconds;
   let d;
   let username;
@@ -17,7 +18,7 @@
 
   document.addEventListener("DOMContentLoaded", function() {
     var elems = document.querySelectorAll(".sidenav");
-    var instances = M.Sidenav.init(elems, 0.5);
+    var instances = M.Sidenav.init(elems, 200);
   });
 
   function reloadPage() {
@@ -30,6 +31,7 @@
       "jwt= " +
       document.cookie.substring(4) +
       "; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    navigate("/", { replace: true });
     reloadPage();
   }
 </script>
@@ -38,25 +40,19 @@
   nav {
     background-color: black;
   }
-
-  .myBtn {
-    background-color: black;
-    color: white;
-    border: 0;
-    box-shadow: none;
-    border-radius: 0px;
-  }
 </style>
 
 <nav class="nav-extended">
   <div class="nav-wrapper">
     <div class="container">
       <a
-        href="/placeholder"
+        href="/"
         noroute
-        data-target="mobile-demo"
+        data-target="mobile"
         class="sidenav-trigger">
-        <i class="material-icons">menu</i>
+        <i class="material-icons">
+          <Menu />
+        </i>
       </a>
       <Link to="/">
         <span class="brand-logo">Microblog</span>
@@ -70,7 +66,18 @@
         </li>
         &nbsp;
         {#if document.cookie !== ''}
-          <button class="myBtn" on:click={logoutBtn}>Logout</button>
+          <li>
+            <a
+              href="/placeholder"
+              noroute
+              class="sideMyBtn"
+              on:click={event => {
+                event.preventDefault();
+                logoutBtn();
+              }}>
+              Logout
+            </a>
+          </li>
           &nbsp;&nbsp; Hello, {username}
         {:else}
           <li>
@@ -82,7 +89,7 @@
   </div>
 </nav>
 
-<ul class="sidenav" id="mobile-demo">
+<ul class="sidenav sidenav-close" id="mobile">
   <li>
     <Link to="/">Home</Link>
   </li>
@@ -90,7 +97,18 @@
     <Link to="/about">About</Link>
   </li>
   {#if document.cookie !== ''}
-    <p />
+    <li>
+      <a
+        href="/placeholder"
+        noroute
+        class="sideMyBtn"
+        on:click={event => {
+          event.preventDefault();
+          logoutBtn();
+        }}>
+        Logout
+      </a>
+    </li>
   {:else}
     <li>
       <Link to="/login">Login</Link>

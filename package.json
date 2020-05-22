@@ -20,6 +20,7 @@
     "axios": "^0.19.2",
     "materialize-css": "^1.0.0-rc.2",
     "sirv-cli": "^0.4.4",
+    "svelte-material-icons": "^1.0.3",
     "svelte-routing": "^1.4.2"
   }
 }

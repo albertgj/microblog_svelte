@@ -21,16 +21,14 @@ Run the microblog rest api and mysql workbench.
 |----------|----------|
 | admin1   | root     |  
 | admin2   | root     |  
+
+## Notes
+The jwt that is sent by the server is stored in a cookie. **This is not recommended**, it should be stored in a **HttpOnly cookie**, but for **semplicity** I used normal client side cookies to store the token.
 ___
 
 ## Configuration
 
-
-
 *Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
-
-
-
 
 
 ## Get started
