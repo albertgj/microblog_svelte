@@ -6,33 +6,19 @@
     import Navbar from "./layouts/Navbar.svelte";
     import Home from './pages/Home.svelte';
     import About from './pages/About.svelte';
-    import Post from './pages/Post.svelte';
-    import Comments from "./components/Comments.svelte";
-    import {onMount} from "svelte";
-
-    let res;
-    let myJson;
-    onMount(() => {
-        let data = new Date
-        let oraAttuale = [data.getHours(), data.getMinutes(), data.getSeconds()].join(':');
-
-        //let tokenMilliseconds = JSON.parse(atob(document.cookie.substring(4).split('.')[1]))['exp'];
-        //let oraJson = new Date(tokenMilliseconds*1000), oraToken = [oraJson.getHours(), oraJson.getMinutes(), oraJson.getSeconds()].join(':');
-    });
-
+    import Comments from './pages/Comments.svelte';
+    import Register from './pages/Register.svelte';
 </script>
 
 <Router>
-
     <Navbar />
     <div class="container">
+        <Route path="/" component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/post" component={Post} />
-        <Route path="/" component={document.cookie === '' ? Login : Home} />
         <Route path="/login" component={Login}/>
+        <Route path="/posts/:id/comments" let:params>
+            <Comments id={params.id}/>
+        </Route>
+        <Route path="/register" component={Register}/>
     </div>
 </Router>
-
-<style>
-
-</style>

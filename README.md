@@ -1,19 +1,36 @@
+### In order to use correctly the web app read this document. 
+___
+## Introduction
+This Web App was created with [SvelteJS](https://svelte.dev) and it uses the [microblog rest api](https://github.com/albertgj/microblog).
+
+## Known Problems
+* THERE IS A PROBLEM WITH THE ROUTING LIBRARY USED IN THIS APP
+  * **To avoid any problems DO NOT refresh the page when you navigate between pages. You can refresh only when you are in the homepage, otherwise the router doesn't find the pages.**
+
+## Instructions
+First of all pull the microblog rest api, to get the newest features.
+
+Run the microblog rest api and mysql workbench.
+
+**The registration of a new user gives this user a "USER ROLE" by default**
+
+**Also when you REGISTER a new user you have to navigate to the login page to signin.**
+
+**You can use the two admin users that are saved in the db automatically:**
+| USERNAME | PASSWORD |
+|----------|----------|
+| admin1   | root     |  
+| admin2   | root     |  
+___
+
+## Configuration
+
+
+
 *Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
----
 
-# svelte app
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
 
 ## Get started
@@ -21,7 +38,7 @@ cd svelte-app
 Install the dependencies...
 
 ```bash
-cd svelte-app
+cd microblog-svelte
 npm install
 ```
 
@@ -42,52 +59,4 @@ To create an optimised version of the app:
 
 ```bash
 npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-
-## Deploying to the web
-
-### With [now](https://zeit.co/now)
-
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-now deploy --name my-project
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
 ```
