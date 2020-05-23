@@ -6,12 +6,12 @@
 
   let titolo = "";
   let text = "";
-  let username;
-  let userId;
+  let username = "";
+  let userId = "";
   let token = document.cookie.substring(4);
 
   let loading = false;
-  
+
   var d = new Date(),
     dformat =
       [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") +
@@ -22,6 +22,7 @@
 
   if (document.cookie !== "") {
     username = JSON.parse(atob(token.split(".")[1]))["sub"];
+
     userId = JSON.parse(atob(token.split(".")[1]))["user_id"];
   }
 
@@ -55,11 +56,11 @@
       },
       data: myPost
     })
-    .then(response => {
-        post = response.data;
+      .then(response => {
+        post = response.data["body"]["response"];
         dispatch("postCreated", post);
-    })
-    .catch(error => console.log(error));
+      })
+      .catch(error => console.log(error));
 
     loading = false;
   }
@@ -81,7 +82,9 @@
       <input type="text" bind:value={text} />
     </div>
     <div class="center-align">
-      <button type="submit" class="waves-effect waves-light light-blue darken-4 btn">
+      <button
+        type="submit"
+        class="waves-effect waves-light light-blue darken-4 btn">
         AGGIUNGI
       </button>
     </div>

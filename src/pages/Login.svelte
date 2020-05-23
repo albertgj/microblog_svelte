@@ -8,9 +8,7 @@
   let jwttoken;
   let username = "";
   let password = "";
-  //let tokenMilliseconds = JSON.parse(atob(document.cookie.substring(4).split('.')[1]))['exp'];
-  //let dataToken = Date(tokenMilliseconds*1000);
-  //let formatedData = dataToken.substring(0,2) + ", " + dataToken.substring(8, 10) + " " + dataToken.substring(4, 7) + " " + dataToken.substring(11, 15) + " " + dataToken.substring(16, 24) + " GMT";
+  let loginResp = "";
 
   function onSubmit(event) {
     loading = true;
@@ -49,6 +47,7 @@
       })
       .catch(function(error) {
         console.log(error);
+        loginResp = "Bad Credentials. Retry !";
         loading = false;
       });
 
@@ -153,6 +152,7 @@
             </a>
           </h6>
         </label>
+        <p class="center-align">{loginResp}</p>
       </div>
     </form>
   </div>

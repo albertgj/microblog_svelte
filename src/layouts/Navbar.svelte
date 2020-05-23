@@ -68,7 +68,7 @@
         {#if document.cookie !== ''}
           <li>
             <a
-              href="/placeholder"
+              href="/"
               noroute
               class="sideMyBtn"
               on:click={event => {

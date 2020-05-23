@@ -65,15 +65,26 @@
     margin-bottom: 10px;
   }
 
-  .row .note {
+  .preloader-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  h3 {
     text-align: center;
-    margin: 50px 0px 0px auto;
-    display: block;
-    font-size: 17px;
   }
 </style>
 
-{#if !loading}
+{#if loading}
+  <p />
+{:else}
   <div class="row">
     <div class="card">
       <div class="card-content">
@@ -91,8 +102,6 @@
       </div>
     </div>
   </div>
-{:else}
-  <div class="indeterminate" />
 {/if}
 
 {#if document.cookie !== ''}
@@ -104,18 +113,24 @@
 {/if}
 
 <div class="row">
-  {#if comments.length === 0}
-    <div>
-      <p class="note">IT SEEMSE THAT THIS POST DOESN'T HAVE ANY COMMENTS.</p>
-      <br />
-      {#if document.cookie !== ''}
-        <p class="note">BE THE FIRST ONE TO COMMENT ON THIS POST</p>
-      {:else}
-        <p class="note">
-          IF YOU WANT TO BE THE FIRST ONE TO COMMENT LOGIN OR REGISTER
-        </p>
-      {/if}
+  {#if loading}
+    <div class="preloader-background">
+      <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle" />
+          </div>
+          <div class="gap-patch">
+            <div class="circle" />
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle" />
+          </div>
+        </div>
+      </div>
     </div>
+  {:else if comments.length === 0}
+    <h3>No comments.</h3>
   {:else}
     {#each comments as comment (comment.id)}
       <ul class="collection">
