@@ -10,7 +10,6 @@
   let userId = "";
   let username = "";
 
-  let loading = false;
   var d = new Date(),
     dformat =
       [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") +
@@ -58,31 +57,25 @@
       },
       data: myComment
     })
-    .then(response => {
+      .then(response => {
         comment = response.data["body"]["response"];
         dispatch("commentCreated", comment);
-        testo = '';
-    })
-    .catch(error => console.log(error));
-
-    loading = true;
-
-    loading = false;
+        testo = "";
+      })
+      .catch(error => console.log(error));
   }
 </script>
 
-{#if !loading}
-  <form on:submit={onSubmit}>
-    <div class="input-field">
-      <label for="text">Testo</label>
-      <input type="text" bind:value={testo} />
-    </div>
-    <div class="center-align">
-      <button type="submit" class="waves-effect waves-light light-blue darken-4 btn">
-        AGGIUNGI
-      </button>
-    </div>
-  </form>
-{:else}
-  <div class="indeterminate" />
-{/if}
+<form on:submit={onSubmit}>
+  <div class="input-field">
+    <label for="text">Testo</label>
+    <input type="text" bind:value={testo} />
+  </div>
+  <div class="center-align">
+    <button
+      type="submit"
+      class="waves-effect waves-light light-blue darken-4 btn">
+      AGGIUNGI
+    </button>
+  </div>
+</form>
